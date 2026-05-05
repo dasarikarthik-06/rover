@@ -27,8 +27,8 @@ public class App {
         RoverSystemScanner scanner = RoverSystemScanner.from(text);
         Navigator navigator = Navigator.create();
 
-        Boundary boundary = Plateau.extractBoundary(scanner);
-        CommandCreator commandCreator = new CommandCreator();
+            Boundary boundary = Plateau.extractBoundary(scanner);
+            CommandCreator commandCreator = new CommandCreator();
 
         RoverSystemParser roverSystemParser = new RoverSystemParser(scanner, navigator, boundary, commandCreator);
         RoverSystem system = roverSystemParser.parse();
