@@ -47,6 +47,12 @@ public class RoverSystemScanner {
         return new Coordinate(x, y);
     }
 
+    public Coordinate scanBoundary() {
+        int topRightX = this.scanNumber();
+        int topRightY = this.scanNumber();
+        return new Coordinate(topRightX, topRightY);
+    }
+
     public Direction scanDirection() {
         return Direction.valueOf(this.consume());
     }

@@ -20,6 +20,6 @@ class AppTest {
             System.setOut(originalOut);
         }
 
-        assertEquals("-4 6 N" + System.lineSeparator(), output.toString());
+        assertEquals("1 4 W\n-1 3 N\n" + System.lineSeparator(), output.toString());
     }
 }

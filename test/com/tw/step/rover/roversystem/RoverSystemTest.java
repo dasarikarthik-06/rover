@@ -19,10 +19,10 @@ class RoverSystemTest {
         RoverCommands commands = new RoverCommands();
         commands.add(new MoveCommand(Navigator.create(), new InfinitePlateau()));
 
-        roverSystem.addRover(rover);
-        roverSystem.addCommands(commands);
+        roverSystem.addRover("R",rover);
+        roverSystem.addCommands("R",commands);
         roverSystem.execute();
 
-        assertEquals("0 1 N", roverSystem.toString());
+        assertEquals("0 1 N\n", roverSystem.toString());
     }
 }

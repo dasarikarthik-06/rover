@@ -56,6 +56,7 @@ public class Rover {
 
     @Override
     public String toString() {
+        String state = this.roverState instanceof LiveRoverState ? "Active" : "Lost";
         return coordinate.toString() + " " + heading.toString();
     }
 

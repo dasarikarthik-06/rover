@@ -1,7 +1,6 @@
 package com.tw.step.rover.roversystem;
 
 import com.tw.step.rover.boundary.Boundary;
-import com.tw.step.rover.boundary.Plateau;
 import com.tw.step.rover.commands.CommandCreator;
 import com.tw.step.rover.commands.RoverCommand;
 import com.tw.step.rover.commands.RoverCommands;
@@ -13,48 +12,49 @@ import com.tw.step.rover.rover.Rover;
 public class RoverSystemParser {
     private final RoverSystemScanner scanner;
     private final Navigator navigator;
+    private final Boundary boundary;
     private final CommandCreator commandCreator;
 
-    public RoverSystemParser(RoverSystemScanner scanner, Navigator navigator, CommandCreator commandCreator) {
+    public RoverSystemParser(RoverSystemScanner scanner, Navigator navigator, Boundary boundary, CommandCreator commandCreator) {
         this.scanner = scanner;
         this.navigator = navigator;
+        this.boundary = boundary;
         this.commandCreator = commandCreator;
     }
 
-    private Rover parseRover() {
-        String roverId = scanner.consume();
+    private Rover parseRover(String roverId) {
         Coordinate coordinate = scanner.scanCoordinate();
         Direction heading = scanner.scanDirection();
         return new Rover(roverId, coordinate, heading);
     }
 
-    public Boundary parseBoundary() {
-        int maxX = scanner.scanNumber();
-        int maxY = scanner.scanNumber();
-        return new Plateau(new Coordinate(0, 0), new Coordinate(maxX, maxY));
-    }
-
 
     public RoverSystem parse() {
         RoverSystem roverSystem = new RoverSystem();
-        Boundary boundary = parseBoundary();
-        while (scanner.peek() != null && !scanner.peek().contains(":")) {
-            Rover rover = parseRover();
-            String roverId = rover.getId();
+        if (!scanner.peek().contains("R")) {
+            Rover rover = parseRover("R");
+            roverSystem.addRover("R", rover);
+            parseInstructions("R", roverSystem);
+            return roverSystem;
+        }
+
+        while (!scanner.peek().contains(":")) {
+            String roverId = scanner.consume();
+            Rover rover = parseRover(roverId);
             roverSystem.addRover(roverId, rover);
         }
 
         while (scanner.peek() != null) {
-            parseInstructions(roverSystem, boundary);
+            String token = scanner.consume();
+            String roverId = token.replace(":", "");
+            parseInstructions(roverId, roverSystem);
         }
         return roverSystem;
     }
 
-    private void parseInstructions(RoverSystem roverSystem, Boundary boundary) {
-        String token = scanner.consume();
-        String roverId = token.replace(":", "");
+    private void parseInstructions(String roverId, RoverSystem roverSystem) {
         RoverCommands roverCommands = parseRoverCommands(boundary);
-        roverSystem.assignInstructions(roverId, roverCommands);
+        roverSystem.addCommands(roverId, roverCommands);
     }
 
     private RoverCommands parseRoverCommands(Boundary boundary) {

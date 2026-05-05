@@ -9,7 +9,7 @@ public class RoverSystem {
     private Rover rover;
     private RoverCommands roverCommands;
     private HashMap<String, Rover> rovers = new HashMap<>();
-    private HashMap<String, RoverCommands> roverInstructions = new HashMap<>();
+    private HashMap<String, RoverCommands> commands = new HashMap<>();
 
     public void addRover(Rover rover) {
         this.rover = rover;
@@ -20,19 +20,36 @@ public class RoverSystem {
     }
 
     public void execute() {
-        this.roverCommands.execute(this.rover);
+        for (String roverId : rovers.keySet()) {
+            Rover rover = rovers.get(roverId);
+            RoverCommands roverCommands = commands.get(roverId);
+            if (roverCommands != null) {
+                roverCommands.execute(rover);
+            }
+        }
     }
+
 
     @Override
     public String toString() {
-        return rover.toString();
+        if (rovers.isEmpty()) {
+            return rover.toString();
+        }
+
+        StringBuilder roversPosition = new StringBuilder("");
+        for (String roverId : rovers.keySet()) {
+            Rover rover = rovers.get(roverId);
+            roversPosition.append(rover.toString());
+            roversPosition.append("\n");
+        }
+        return roversPosition.toString();
     }
 
     public void addRover(String roverId, Rover rover) {
         rovers.put(roverId, rover);
     }
 
-    public void assignInstructions(String roverId, RoverCommands roverCommands) {
-        roverInstructions.put(roverId, roverCommands);
+    public void addCommands(String roverId, RoverCommands roverCommands) {
+        commands.put(roverId, roverCommands);
     }
 }
