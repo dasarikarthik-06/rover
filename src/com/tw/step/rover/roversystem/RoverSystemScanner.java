@@ -4,6 +4,8 @@ import com.tw.step.rover.commands.RoverCommands;
 import com.tw.step.rover.position.Coordinate;
 import com.tw.step.rover.position.Direction;
 
+import java.util.Arrays;
+
 public class RoverSystemScanner {
     private final String[] tokens;
     private int currentIndex;
@@ -14,7 +16,7 @@ public class RoverSystemScanner {
     }
 
     public String peek() {
-        if(this.isDone()) return null;
+        if (this.isDone()) return null;
         return this.tokens[this.currentIndex];
     }
 
@@ -24,7 +26,7 @@ public class RoverSystemScanner {
 
     public String consume() {
         String token = this.peek();
-        if(this.currentIndex < this.tokens.length) {
+        if (this.currentIndex < this.tokens.length) {
             this.currentIndex++;
         }
         return token;
@@ -42,7 +44,7 @@ public class RoverSystemScanner {
     public Coordinate scanCoordinate() {
         int x = this.scanNumber();
         int y = this.scanNumber();
-        return new Coordinate(x,y);
+        return new Coordinate(x, y);
     }
 
     public Direction scanDirection() {

@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class RoverSystemParserTest {
     @Test
     void shouldParseAndExecuteRoverSystem() {
-        RoverSystemScanner scanner = RoverSystemScanner.from("1 2 N\nRFF");
-        RoverSystemParser parser = new RoverSystemParser(scanner, Navigator.create(), new InfinitePlateau(), new CommandCreator());
+        RoverSystemScanner scanner = RoverSystemScanner.from("5 5 R1 1 2 N\nR1: RFF");
+        RoverSystemParser parser = new RoverSystemParser(scanner, Navigator.create(), new CommandCreator());
 
         RoverSystem roverSystem = parser.parse();
         roverSystem.execute();

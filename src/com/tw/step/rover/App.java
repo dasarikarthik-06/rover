@@ -10,16 +10,24 @@ import com.tw.step.rover.roversystem.RoverSystemScanner;
 
 public class App {
     static void main() {
+//        String text = """
+//1 5 N
+//LFFRFLFFFR
+//                """;
         String text = """
-1 5 N
-LFFRFLFFFR
+5 5
+R1 1 3 N
+R2 1 4 N
+R1: LFFRFLFFFR
+R2: LRL
                 """;
 
         RoverSystemScanner scanner = RoverSystemScanner.from(text);
         Navigator navigator = Navigator.create();
         Boundary boundary = new InfinitePlateau();
         CommandCreator commandCreator = new CommandCreator();
-        RoverSystemParser roverSystemParser = new RoverSystemParser(scanner, navigator, boundary, commandCreator);
+//        RoverSystemParser roverSystemParser = new RoverSystemParser(scanner, navigator, boundary, commandCreator);
+        RoverSystemParser roverSystemParser = new RoverSystemParser(scanner, navigator, commandCreator);
         RoverSystem system = roverSystemParser.parse();
         system.execute();
         System.out.println(system);

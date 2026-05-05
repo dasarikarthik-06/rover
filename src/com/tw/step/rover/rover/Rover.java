@@ -58,4 +58,8 @@ public class Rover {
     public String toString() {
         return coordinate.toString() + " " + heading.toString();
     }
+
+    public String getId() {
+        return id;
+    }
 }
