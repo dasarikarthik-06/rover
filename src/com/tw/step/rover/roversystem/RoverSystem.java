@@ -13,9 +13,7 @@ public class RoverSystem {
         for (String roverId : rovers.keySet()) {
             Rover rover = rovers.get(roverId);
             RoverCommands roverCommands = commands.get(roverId);
-            if (roverCommands != null) {
-                roverCommands.execute(rover);
-            }
+            roverCommands.execute(rover);
         }
     }
 

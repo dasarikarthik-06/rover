@@ -34,6 +34,10 @@ public class Rover {
         this.roverState = this.roverState.move(navigator, boundary);
     }
 
+    public boolean isRoverDead() {
+        return this.roverState instanceof DeadRoverState;
+    }
+
     void turnLeftInternal(Navigator navigator) {
         this.heading = navigator.leftOf(this.heading);
     }

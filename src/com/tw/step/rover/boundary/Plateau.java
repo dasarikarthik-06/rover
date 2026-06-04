@@ -14,8 +14,8 @@ public class Plateau implements Boundary {
 
     public static Boundary extractBoundary(RoverSystemScanner scanner) {
         Coordinate bottomLeft = new Coordinate(0, 0);
-        Coordinate topLeft = scanner.scanBoundary();
-        return new Plateau(bottomLeft, topLeft);
+        Coordinate topRight = scanner.scanBoundary();
+        return new Plateau(bottomLeft, topRight);
     }
 
     @Override

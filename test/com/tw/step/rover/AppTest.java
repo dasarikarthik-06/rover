@@ -20,6 +20,6 @@ class AppTest {
             System.setOut(originalOut);
         }
 
-        assertEquals("1 4 W Active\n-1 3 N Lost\n" + System.lineSeparator(), output.toString());
+        assertEquals("1 4 W Active\n-1 3 W Lost\n" + System.lineSeparator(), output.toString());
     }
 }

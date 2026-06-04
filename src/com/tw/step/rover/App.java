@@ -11,11 +11,6 @@ import com.tw.step.rover.roversystem.RoverSystemScanner;
 
 public class App {
     static void main() {
-//        String text = """
-//                5 5
-//                1 2 N
-//                LRLRF
-//                """;
         String text = """
                 5 5
                 R1 1 3 N
